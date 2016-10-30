@@ -9,3 +9,7 @@ window.onscroll = function() {
         nav_bar.style.position = "relative";
     nav_bar.style.top = "0px";
 };
+
+$('body').scrollspy({
+    target: '.side_nav_list'
+});
