@@ -1,0 +1,72 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>下载编译原版BHuman2015代码</title>
+    <link href="/blog/css/blog.css" rel="stylesheet">
+    <!--<script src="/js/jquery.js"></script>-->
+    <!--<script src="/js/jquery-scrollspy.js"></script>-->
+    <script src="/blog/js/blog.js"></script>
+</head>
+
+<body>
+    <header>
+        <ul id="top_nav" class="top_navbar">
+            <li class="top_navbar_list"><a>first</a></li>
+            <li class="top_navbar_list"><a>second</a></li>
+        </ul>
+    </header>
+
+    <div class="parent_box">
+        <div id="side_nav" class="side_nav_list">
+            <ul>
+                <li>
+                    <a href="bhuman_chapter2.html#下载BHuman2015代码">
+					下载BHuman2015代码
+					</a>
+                </li>
+                <li>
+                    <a href="bhuman_chapter2.html#编译前的准备工作">
+					编译前的准备工作
+					</a>
+                </li>
+                <li>
+                    <a href="bhuman_chapter2.html#开始编译！">
+					开始编译！
+					</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="blog_content">
+            <h1 id="下载BHuman2015代码">下载BHuman2015代码</h1>
+            <p>你有多种方式获得BHuman代码。</p>
+            <h2>git clone</h2>
+            <p>选择一个合适的文件夹，在终端中直接输入以下命令：</p>
+            <p><b>git clone https://github.com/bhuman/BHumanCodeRelease.git</b></p>
+            <p style="text-align:center"><img src="/pic/1.png" /></p>
+            <h2>直接下载压缩包</h2>
+            <p>登录BHuman的<a href="https://github.com/bhuman/BHumanCodeRelease">Github仓库</a>。点击download zip下载。</p>
+            <p><b>注意：请不要将在windows下解压的文件夹移入linux系统。</b></p>
+            <p style="text-align:center"><img src="/pic/download_zip.png" /></p>
+            <br>
+            <h1 id="编译前的准备工作">编译前的准备工作</h1>
+            <p>在终端中输入以下命令安装所需的库</p>
+            <p><b>sudo apt-get install qt4-dev-tools libglew-dev libxml2-dev clang graphviz
+</b></p>
+            <p>在BHumanCodeRelease文件夹中执行以下命令配置naoqi-sdk</p>
+            <p><b>./Install/installAlcommon /path/to/naoqi-sdk-2.1.4.13-linux32.tar.gz</b></p>
+            <p>将/path/to替换成自己的路径</p>
+            <p style="text-align:center"><img src="/pic/3.png" /></p>
+            <p>如果没有安装sdk编译时会出现以下错误</p>
+            <p style="text-align:center"><img src="/pic/2.png" /></p>
+            <br>
+            <h1 id="开始编译！">开始编译！</h2>
+                <p>进入BHumanCodeRelease/Make/Linux文件夹</p>
+                <p>在终端执行make即可</p>
+        </div>
+</body>
+
+</html>
