@@ -1,0 +1,81 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>使用SimRobot调试程序</title>
+    <link href="/blog/css/blog.css" rel="stylesheet">
+    <!--<script src="/js/jquery.js"></script>-->
+    <!--<script src="/js/jquery-scrollspy.js"></script>-->
+    <script src="/blog/js/blog.js"></script>
+</head>
+
+<body>
+    <header>
+        <ul id="top_nav" class="top_navbar">
+            <li class="top_navbar_list"><a>first</a></li>
+            <li class="top_navbar_list"><a>second</a></li>
+        </ul>
+    </header>
+
+    <div class="parent_box">
+        <div id="side_nav" class="side_nav_list">
+            <ul>
+                <li>
+                    <a href="bhuman_chapter3.html#使用SimRobot打开一个场景">
+					使用SimRobot打开一个场景
+					</a>
+                </li>
+                <li>
+                    <a href="bhuman_chapter3.html#SimRobot界面介绍">
+					SimRobot界面介绍
+					</a>
+                </li>
+                <li>
+                    <a href="bhuman_chapter3.html#开始模拟">
+					开始模拟
+					</a>
+                </li>
+                <li>
+                    <a href="bhuman_chapter3.html#输出调试信息">
+					输出调试信息
+					</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="blog_content">
+            <h1 id="使用SimRobot打开一个场景">使用SimRobot打开一个场景</h1>
+            <p>双击打开或者在终端中运行(取决于你的编译选项，可能是Debug/Develop/Release三者之一)</p>
+            <p><b>BHumanCodeRelease/Build/Linux/SimRobot/Develop/SimRobot</b></p>
+            <p>点击左上角的打开按钮</p>
+            <p style="text-align:center"><img src="/pic/4.png" /></p>
+            <p>然后选择一个场景，比如BH2015.ros2（路径在BHumanCodeRelease/Conifg/Scenes/文件夹下）</p>
+            <p style="text-align:center"><img src="/pic/5.png" /></p>
+            <br>
+            <h1 id="SimRobot界面介绍">SimRobot界面介绍</h1>
+            <p>打开SimRobot一行你应该会首先看到以下界面</p>
+            <p style="text-align:center"><img src="/pic/6.png" /></p>
+            <p>双击RoboCup那一项弹出以下子窗口。每个子窗口可以拖动缩放。</p>
+            <p style="text-align:center"><img style="width:90%" src="/pic/7.png" /></p>
+            <p>点开image项，可以看到有4项，其中lower代表下摄像头看到的图像，segmented代表经过处理后经过颜色分类得到的图像。<br>识别得到的结果也会画在原始图像上，如图中红色的场地线黑黑圈代表的红球。</p>
+            <p style="text-align:center"><img style="width:90%" src="/pic/8.png" /></p>
+            <p>点开behavior可以看到机器人正在执行行为的调用树。</p>
+            <p style="text-align:center"><img style="width:90%" src="/pic/9.png" /></p>
+            <p>点开behavior下的colorCalibration进入色标矫正界面。可以看到随着我们拖动滑动条，右边的图像也发生变化。</p>
+            <p style="text-align:center"><img style="width:90%" src="/pic/10.png" /></p>
+            <p>将鼠标长时间放在图像上可以显示该点像素值，可以据此校准色标。</p>
+            <p style="text-align:center"><img src="/pic/11.png" /></p>
+            <p>点击上面的按钮，可以选择要矫正的颜色。</p>
+            <p style="text-align:center"><img src="/pic/12.png" /></p>
+            <p>在图像上点击右键，菜单中有若干选项。</p>
+            <p style="text-align:center"><img src="/pic/13.png" /></p>
+            <h1 id="开始模拟">开始模拟</h1>
+            <p>施工中</p>
+            <h1 id="输出调试信息">输出调试信息</h1>
+            <p>施工中</p>
+        </div>
+</body>
+
+</html>
