@@ -1,0 +1,126 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>编写你自己的策略</title>
+    <link href="/blog/css/blog.css" rel="stylesheet">
+    <!--<script src="/js/jquery.js"></script>-->
+    <!--<script src="/js/jquery-scrollspy.js"></script>-->
+    <script src="/blog/js/blog.js"></script>
+</head>
+
+<body>
+    <header>
+        <ul id="top_nav" class="top_navbar">
+            <li class="top_navbar_list"><a>first</a></li>
+            <li class="top_navbar_list"><a>second</a></li>
+        </ul>
+    </header>
+
+    <div class="parent_box">
+        <div id="side_nav" class="side_nav_list">
+            <ul>
+                <li>
+                    <a href="bhuman_chapter4.html#代码结构的基本介绍">
+					代码结构的基本介绍
+					</a>
+                </li>
+                <li>
+                    <a href="bhuman_chapter4.html#如何对5个机器人的行为进行策略设计？">
+					如何对5个机器人的行为进行策略设计？
+					</a>
+                </li>
+                <li>
+                    <a href="bhuman_chapter4.html#调用其他模块的结果">
+					调用其他模块的结果
+					</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="blog_content">
+            <h1 id="代码结构的基本介绍">代码结构的基本介绍</h1>
+            <ol>
+                <li>Striker</li>
+                <li>Supporter</li>
+                <li>Defender1</li>
+                <li>Defender2</li>
+                <li>Keeper</li>
+            </ol>
+            <p style="text-align:center"><img src="/pic/24.png" /></p>
+            <p>如果要在Options文件夹下添加.h文件，需要在Options.h里#include “.h文件路径“</p>
+            <p style="text-align:center"><img src="/pic/25.png" /></p>
+            <p>GameControl文件夹对比赛的流程进行控制，比赛包括ready,set,playing,penalty四个状态（详细阅读rules2016）</p>
+            <p>HandleGameState.h</p>
+            <p style="text-align:center"><img src="/pic/26.png" /></p>
+            <p>这里的ReadyState（）和PlayingState（）是GameControl文件夹下的.h文件定义的option，如果想要改变ready和playing状态，需要改PlayingState.h和ReadyState.h PlayingState.h可以设置不同队员的角色 ReadyState.h<br>可以写让机器人自动走上场到指定的位点的代码（具体位点看rules2016）
+            </p>
+            <br>
+            <h1 id="如何对5个机器人的行为进行策略设计？">如何对5个机器人的行为进行策略设计？</h1>
+            <p><pre>在Roles文件夹下自行创建5个机器人的行为文件，striker.h,keeper.h,defender1.h,defender2.h,supports.h（名字可以随意，但是要分清角色）
+仿照Striker.h编写CABSL代码（bhuman自己设计的语言）
+具体结构为：
+Option(xxx)
+{
+	Initial_state()
+	{
+		Transition
+		{
+		}
+		Action
+		{
+		}
+	}
+
+	State(1)
+	{
+		Transition
+		{
+		}
+		Action
+		{
+		}
+
+	}
+
+	State(2)
+	{
+		Transition
+		{
+		}
+		Action
+		{
+		}
+
+	}
+
+	.
+	.
+	.
+	.
+	.
+}
+有没有感到跟choregraphe盒子跳转很像？需要注意的是action里的动作是同步的，所以同一个action不能够出现两次walkToTarget()，
+一个option可以调用另一个 option</pre></p>
+            <br>
+            <h1 id="调用其他模块的结果">调用其他模块的结果</h1>
+            <p>我们前面提到了theRobotPose，但是并没有说明这个变量是在哪里定义的。</p>
+            <p>打开BHumanCodeRelease/Src/Modules/BehaviorControl/BehaviorControl2015/BehaviorControl2015.h文件，我们可以看到一长串的REQUIRES和PROVIDES</p>
+            <p style="text-align:center"><img src="/pic/27.png" /></p>
+            <p>可以看到每个REQUIRES和PROVIDES后面都跟了一个类型的名称。</p>
+            <p>事实上</p>
+            <p>REQUIRES(CLASSFOO)</p>
+            <p>相当于</p>
+            <p>const CLASSFOO& theCLASSFOO = ...</p>
+            <p>PROVIDES(CLASSFOO)</p>
+            <p>则需要你自己定义一个（这个不是很确定）</p>
+            <p>CLASSFOO& theCLASSFOO；</p>
+            <p>然而在如果你不是自定义模块的话暂时不需要考虑这些。</p>
+            <p>你只需要知道你可以通过修改PROVIDES的theCLASSFOO就可以把这个变量传递给其他模块。</p>
+        </div>
+    </div>
+</body>
+
+</html>
