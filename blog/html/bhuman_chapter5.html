@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <style type="text/css" id="wiz_custom_css">
+        html,
+        body {
+            font-size: 15px;
+        }
+        
+        body {
+            font-family: Helvetica, "Hiragino Sans GB", "Microsoft Yahei", SimSun, SimHei, arial, sans-serif;
+            line-height: 1.6;
+            padding: 0;
+            margin: 20px 36px;
+            margin: 1.33rem 2.4rem;
+        }
+        
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 20px 0 10px;
+            margin: 1.33rem 0 0.667rem;
+            padding: 0;
+            font-weight: bold;
+        }
+        
+        h1 {
+            font-size: 21px;
+            font-size: 1.4rem;
+        }
+        
+        h2 {
+            font-size: 20px;
+            font-size: 1.33rem;
+        }
+        
+        h3 {
+            font-size: 18px;
+            font-size: 1.2rem;
+        }
+        
+        h4 {
+            font-size: 17px;
+            font-size: 1.13rem;
+        }
+        
+        h5 {
+            font-size: 15px;
+            font-size: 1rem;
+        }
+        
+        h6 {
+            font-size: 15px;
+            font-size: 1rem;
+            color: #777777;
+            margin: 1rem 0;
+        }
+        
+        div,
+        p,
+        blockquote,
+        ul,
+        ol,
+        dl,
+        table,
+        pre {
+            margin: 10px 0;
+            margin: 0.667rem 0;
+        }
+        
+        ul,
+        ol {
+            padding-left: 32px;
+            padding-left: 2.13rem;
+        }
+        
+        blockquote {
+            border-left: 4px solid #dddddd;
+            padding: 0 12px;
+            padding: 0 0.8rem;
+            color: #aaa;
+        }
+        
+        blockquote> :first-child {
+            margin-top: 0;
+        }
+        
+        blockquote> :last-child {
+            margin-bottom: 0;
+        }
+        
+        img {
+            border: 0;
+            max-width: 100%;
+            height: auto !important;
+        }
+        
+        table {
+            border-collapse: collapse;
+            border: 1px solid #bbbbbb;
+        }
+        
+        td {
+            border-collapse: collapse;
+            border: 1px solid #bbbbbb;
+        }
+        
+        @media screen and (max-width: 660px) {
+            body {
+                margin: 20px 18px;
+                margin: 1.33rem 1.2rem;
+            }
+        }
+        
+        @media only screen and (-webkit-max-device-width: 1024px),
+        only screen and (-o-max-device-width: 1024px),
+        only screen and (max-device-width: 1024px),
+        only screen and (-webkit-min-device-pixel-ratio: 3),
+        only screen and (-o-min-device-pixel-ratio: 3),
+        only screen and (min-device-pixel-ratio: 3) {
+            html,
+            body {
+                font-size: 17px;
+            }
+            body {
+                line-height: 1.7;
+                margin: 12px 15px;
+                margin: 0.75rem 0.9375rem;
+                color: #353c47;
+            }
+            h1 {
+                font-size: 34px;
+                font-size: 2.125rem;
+            }
+            h2 {
+                font-size: 30px;
+                font-size: 1.875rem;
+            }
+            h3 {
+                font-size: 26px;
+                font-size: 1.625rem;
+            }
+            h4 {
+                font-size: 22px;
+                font-size: 1.375rem;
+            }
+            h5 {
+                font-size: 18px;
+                font-size: 1.125rem;
+            }
+            h6 {
+                color: inherit;
+            }
+            div,
+            p,
+            blockquote,
+            ul,
+            ol,
+            dl,
+            table,
+            pre {
+                margin: 0;
+            }
+            ul,
+            ol {
+                padding-left: 40px;
+                padding-left: 2.5rem;
+            }
+            blockquote {
+                border-left: 4px solid #c8d4e8;
+                padding: 0 15px;
+                padding: 0 0.9375rem;
+                color: #b3c2dd;
+            }
+        }
+    </style>
+    <style type="text/css" id="wiz_todo_style_id" wiz_link_version="01.00.09">
+        .wiz-todo,
+        .wiz-todo-img {
+            width: 16px;
+            height: 16px;
+            cursor: default;
+            padding: 0 10px 0 2px;
+            vertical-align: -10%;
+            -webkit-user-select: none;
+        }
+        
+        .wiz-todo-label {
+            display: inline-block;
+            padding-top: 7px;
+            padding-bottom: 6px;
+            line-height: 1.5;
+        }
+        
+        .wiz-todo-label-checked {
+            /*text-decoration: line-through;*/
+            color: #666;
+        }
+        
+        .wiz-todo-label-unchecked {
+            text-decoration: initial;
+        }
+        
+        .wiz-todo-completed-info {
+            padding-left: 44px;
+            display: inline-block;
+        }
+        
+        .wiz-todo-avatar {
+            width: 20px;
+            height: 20px;
+            vertical-align: -20%;
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+        
+        .wiz-todo-account,
+        .wiz-todo-dt {
+            color: #666;
+        }
+    </style>
+    <link type="text/css" rel="stylesheet" id="wiz_code_highlight_link" href="/blog/css/wiz_code_highlight.css">
+</head>
+
+<body>
+    <p>一、对bhuman的module和representation的简单理解：</p>
+    <p>module是各种算法（识别球，自定位，通信，运动控制）的具体的实现过程</p>
+    <p>representation是各个module间的通讯工具</p>
+    <p>举个栗子：</p>
+    <p>module:BehaviorControl在Src/Modules/BehaviorControl/BehaviorControl2015下实现　</p>
+    <p>module:KickEngine在Src/Modules/MotionControl/KickEngine下实现</p>
+    <p>representation: MotionRequest在Src/Representations/MotionControl 下有具体声明</p>
+    <p>这两个module之间通过一个MotionRequest这样一个representation进行传递数据</p>
+    <p>具体过程如下：</p>
+    <p>１.在BehaviorControl2015这个module中通过PROVIDES()这个宏定义提供了一个MotionRequest这样一个representation(注意provide一个representation的时候还要在Config/Locations/Default/module.cfg文件里声明一下)</p>
+    <p>2.在KickEngine这个module中通过REQUIRES()这个宏定义来说明需要引用这个MotionRequest这个representation</p>
+    <p>3.通过对在BehaviorControl2015中对MotionRequest这个representation赋值就能够将数据传递给KickEngine这个moudle</p>
+    <p>栗子结束</p>
+    <p><br/></p>
+    <p>二、简单分析一下这个MotionRequest的结构</p>
+    <p>bhuman源码如下：</p>
+    <pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums list-paddingleft-2"><li class="L0"><code class="language-cpp"><span class="pln">STREAMABLE</span><span class="pun">(</span><span class="typ">MotionRequest</span><span class="pun">,</span></code></li><li class="L1"><code class="language-cpp"><span class="pun">{</span></code></li><li class="L2"><code class="language-cpp"><span class="pln"> &nbsp;ENUM</span><span class="pun">(</span><span class="typ">Motion</span><span class="pun">,</span></code></li><li class="L3"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">{,</span></code></li><li class="L4"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;walk</span><span class="pun">,</span></code></li><li class="L5"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;kick</span><span class="pun">,</span></code></li><li class="L6"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;dmpKick</span><span class="pun">,</span></code></li><li class="L7"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;specialAction</span><span class="pun">,</span></code></li><li class="L8"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;stand</span><span class="pun">,</span></code></li><li class="L9"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;getUp</span><span class="pun">,</span></code></li><li class="L0"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">});</span></code></li><li class="L1"><code class="language-cpp"></code></li><li class="L2"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="com">/**</span></code></li><li class="L3"><code class="language-cpp"><span class="com"> &nbsp; * Prints the motion request to a readable string. (E.g. &quot;walk: 100mm/s 0mm/s 0°/s&quot;)</span></code></li><li class="L4"><code class="language-cpp"><span class="com"> &nbsp; * @param destination The string to fill</span></code></li><li class="L5"><code class="language-cpp"><span class="com"> &nbsp; */</span></code></li><li class="L6"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="kwd">void</span><span class="pln"> printOut</span><span class="pun">(</span><span class="kwd">char</span><span class="pun">*</span><span class="pln"> destination</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">const</span><span class="pun">;</span></code></li><li class="L7"><code class="language-cpp"></code></li><li class="L8"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="com">/** Draws something*/</span></code></li><li class="L9"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="kwd">void</span><span class="pln"> draw</span><span class="pun">()</span><span class="pln"> </span><span class="kwd">const</span><span class="pun">,</span></code></li><li class="L0"><code class="language-cpp"></code></li><li class="L1"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">(</span><span class="typ">Motion</span><span class="pun">)(</span><span class="pln">specialAction</span><span class="pun">)</span><span class="pln"> motion</span><span class="pun">,</span><span class="pln"> </span><span class="com">/**&lt; The selected motion. */</span></code></li><li class="L2"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">(</span><span class="typ">SpecialActionRequest</span><span class="pun">)</span><span class="pln"> specialActionRequest</span><span class="pun">,</span><span class="pln"> </span><span class="com">/**&lt; The special action request, if it is the selected motion. */</span></code></li><li class="L3"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">(</span><span class="typ">WalkRequest</span><span class="pun">)</span><span class="pln"> walkRequest</span><span class="pun">,</span><span class="pln"> </span><span class="com">/**&lt; The walk request, if it is the selected motion. */</span></code></li><li class="L4"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">(</span><span class="typ">KickRequest</span><span class="pun">)</span><span class="pln"> kickRequest</span><span class="pun">,</span><span class="pln"> </span><span class="com">/**&lt; The kick request, if it is the selected motion. */</span></code></li><li class="L5"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">(</span><span class="typ">DmpKickRequest</span><span class="pun">)</span><span class="pln"> dmpKickRequest</span><span class="pun">,</span><span class="pln"> </span><span class="com">/**&lt; The experimental kick request, if it is the selected motion. */</span></code></li><li class="L6"><code class="language-cpp"><span class="pun">});</span></code></li></ol></pre>
+    <p>1.通过对枚举变量motion赋值可以决定机器人现在的行为状态，比如走路walk，射门kick,测试射门dmpkick（理解可能不准确）,specialAction(特殊行为)，站立stand，跌倒后爬起getUp.</p>
+    <p>2.specialActionRequest 对应motion选择specialAction时对应的行为，源码中只提供了<span style="line-height: 1.6;">playDead,</span><span style="line-height: 1.6;">sitDown,</span><span style="line-height: 1.6;">stand,</span><span style="line-height: 1.6;">standHigh（具体看对应的SpecialActionRequest文件）</span></p>
+    <p><span style="line-height: 1.6;">3.walkRequest 对应motion选择为walk时的行为参数,对应定义看WalkRequest文件</span></p>
+    <p><span style="line-height: 1.6;">4.kickRequest对应motion选择为kick时的参数对应看KickRequest文件</span></p>
+    <p>5.dmpKickRequest对应motion选择为dmpkick时的参数对应看DmpKickRequest文件</p>
+    <p>三、WalkRrequest实战</p>
+    <p>bhuman源码中在Src/Modules/BehaviorControl/BehaviorControl2015/Options/Output/MotionRequest/WalkToTarget.h</p>
+    <p>中给出了一个MotionRequest的一个调用,主要用来走路:</p>
+    <pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums list-paddingleft-2"><li class="L0"><code class="language-cpp"><span class="com">/** Sets all members of the MotionRequest representation for executing a TargetMode-WalkRequest</span></code></li><li class="L1"><code class="language-cpp"><span class="com"> * &nbsp;(i.e. Walk to a \c target at a \c speed)</span></code></li><li class="L2"><code class="language-cpp"><span class="com"> * &nbsp;@param speed Walking speeds, in percentage.</span></code></li><li class="L3"><code class="language-cpp"><span class="com"> * &nbsp;@param target Walking target, in mm and radians, relative to the robot.</span></code></li><li class="L4"><code class="language-cpp"><span class="com"> */</span></code></li><li class="L5"><code class="language-cpp"><span class="pln">option</span><span class="pun">(</span><span class="typ">WalkToTarget</span><span class="pun">,</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">const</span><span class="pln"> </span><span class="typ">Pose2f</span><span class="pun">&amp;)</span><span class="pln"> speed</span><span class="pun">,</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">const</span><span class="pln"> </span><span class="typ">Pose2f</span><span class="pun">&amp;)</span><span class="pln"> target</span><span class="pun">)</span></code></li><li class="L6"><code class="language-cpp"><span class="pun">{</span></code></li><li class="L7"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="com">/** Set the motion request. */</span></code></li><li class="L8"><code class="language-cpp"><span class="pln"> &nbsp;initial_state</span><span class="pun">(</span><span class="pln">setRequest</span><span class="pun">)</span></code></li><li class="L9"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">{</span></code></li><li class="L0"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;transition</span></code></li><li class="L1"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">{</span></code></li><li class="L2"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;</span><span class="kwd">if</span><span class="pun">(</span><span class="pln">theMotionInfo</span><span class="pun">.</span><span class="pln">motion </span><span class="pun">==</span><span class="pln"> </span><span class="typ">MotionRequest</span><span class="pun">::</span><span class="pln">walk</span><span class="pun">)</span></code></li><li class="L3"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="kwd">goto</span><span class="pln"> requestIsExecuted</span><span class="pun">;</span></code></li><li class="L4"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">}</span></code></li><li class="L5"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;action</span></code></li><li class="L6"><p><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">{<br/></span></code></p></li><li class="L6"><p><code class="language-cpp"><span style="color: rgb(255, 0, 0);">//</span><span class="pun" style="color: rgb(255, 0, 0);">注意这一部分，是在这里进行的赋值操作<br/></span></code></p></li><li class="L7"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">motion </span><span class="pun">=</span><span class="pln"> </span><span class="typ">MotionRequest</span><span class="pun">::</span><span class="pln">walk</span><span class="pun">;</span></code></li><li class="L8"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">walkRequest</span><span class="pun">.</span><span class="pln">mode </span><span class="pun">=</span><span class="pln"> </span><span class="typ">WalkRequest</span><span class="pun">::</span><span class="pln">targetMode</span><span class="pun">;</span></code></li><li class="L9"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">walkRequest</span><span class="pun">.</span><span class="pln">target </span><span class="pun">=</span><span class="pln"> target</span><span class="pun">;</span></code></li><li class="L0"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">walkRequest</span><span class="pun">.</span><span class="pln">speed </span><span class="pun">=</span><span class="pln"> speed</span><span class="pun">;</span></code></li><li class="L1"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">walkRequest</span><span class="pun">.</span><span class="pln">kickType </span><span class="pun">=</span><span class="pln"> </span><span class="typ">WalkRequest</span><span class="pun">::</span><span class="pln">none</span><span class="pun">;</span></code></li><li class="L2"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">}</span></code></li><li class="L3"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">}</span></code></li><li class="L4"><code class="language-cpp"></code></li><li class="L5"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="com">/** The motion process has started executing the request. */</span></code></li><li class="L6"><code class="language-cpp"><span class="pln"> &nbsp;target_state</span><span class="pun">(</span><span class="pln">requestIsExecuted</span><span class="pun">)</span></code></li><li class="L7"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">{</span></code></li><li class="L8"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;transition</span></code></li><li class="L9"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">{</span></code></li><li class="L0"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;</span><span class="kwd">if</span><span class="pun">(</span><span class="pln">theMotionInfo</span><span class="pun">.</span><span class="pln">motion </span><span class="pun">!=</span><span class="pln"> </span><span class="typ">MotionRequest</span><span class="pun">::</span><span class="pln">walk</span><span class="pun">)</span></code></li><li class="L1"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="kwd">goto</span><span class="pln"> setRequest</span><span class="pun">;</span></code></li><li class="L2"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">}</span></code></li><li class="L3"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;action</span></code></li><li class="L4"><p><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">{<br/></span></code></p></li><li class="L4"><p><code class="language-cpp"><span style="color: rgb(255, 0, 0);">//这部分也是</span></code></p></li><li class="L5"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">motion </span><span class="pun">=</span><span class="pln"> </span><span class="typ">MotionRequest</span><span class="pun">::</span><span class="pln">walk</span><span class="pun">;</span></code></li><li class="L6"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">walkRequest</span><span class="pun">.</span><span class="pln">mode </span><span class="pun">=</span><span class="pln"> </span><span class="typ">WalkRequest</span><span class="pun">::</span><span class="pln">targetMode</span><span class="pun">;</span></code></li><li class="L7"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">walkRequest</span><span class="pun">.</span><span class="pln">target </span><span class="pun">=</span><span class="pln"> target</span><span class="pun">;</span></code></li><li class="L8"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">walkRequest</span><span class="pun">.</span><span class="pln">speed </span><span class="pun">=</span><span class="pln"> speed</span><span class="pun">;</span></code></li><li class="L9"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">walkRequest</span><span class="pun">.</span><span class="pln">kickType </span><span class="pun">=</span><span class="pln"> </span><span class="typ">WalkRequest</span><span class="pun">::</span><span class="pln">none</span><span class="pun">;</span></code></li><li class="L0"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">}</span></code></li><li class="L1"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">}</span></code></li><li class="L2"><code class="language-cpp"><span class="pun">}</span></code></li></ol></pre><br/>
+    <p>下面是我们自己写的一个调用踢球动作的option</p><pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums list-paddingleft-2"><li class="L0"><code class="language-cpp"><span class="com">/**</span></code></li><li class="L1"><code class="language-cpp"><span class="com"> *Shoot the Ball with the specified \c kickMotionType.</span></code></li><li class="L2"><code class="language-cpp"><span class="com"> * @param kickMotionType The kickMotionType to be executed</span></code></li><li class="L3"><code class="language-cpp"><span class="com"> */</span></code></li><li class="L4"><code class="language-cpp"><span class="pln">option</span><span class="pun">(</span><span class="typ">Shoot</span><span class="pun">,</span><span class="pln"> </span><span class="pun">((</span><span class="typ">KickRequest</span><span class="pun">)</span><span class="pln"> </span><span class="typ">KickMotionID</span><span class="pun">)</span><span class="pln"> kickMotionType</span><span class="pun">)</span></code></li><li class="L5"><code class="language-cpp"><span class="pun">{</span></code></li><li class="L6"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="com">/** Set the motion request / kickMotionType. */</span></code></li><li class="L7"><code class="language-cpp"><span class="pln"> &nbsp;initial_state</span><span class="pun">(</span><span class="pln">launch</span><span class="pun">)</span></code></li><li class="L8"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">{</span></code></li><li class="L9"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;transition</span></code></li><li class="L0"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">{</span></code></li><li class="L1"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;</span><span class="kwd">if</span><span class="pun">(</span><span class="pln">theMotionInfo</span><span class="pun">.</span><span class="pln">motion </span><span class="pun">==</span><span class="pln"> </span><span class="typ">MotionRequest</span><span class="pun">::</span><span class="pln">kick </span><span class="pun">&amp;&amp;</span><span class="pln"> theMotionInfo</span><span class="pun">.</span><span class="pln">kickRequest</span><span class="pun">.</span><span class="pln">kickMotionType </span><span class="pun">==</span><span class="pln"> kickMotionType</span><span class="pun">)</span></code></li><li class="L2"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="kwd">goto</span><span class="pln"> execute</span><span class="pun">;</span></code></li><li class="L3"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">}</span></code></li><li class="L4"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;action</span></code></li><li class="L5"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">{</span></code></li><li class="L6"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">motion </span><span class="pun">=</span><span class="pln"> &nbsp;</span><span class="typ">MotionRequest</span><span class="pun">::</span><span class="pln">kick</span><span class="pun">;</span></code></li><li class="L7"><code class="language-cpp"><span class="pln">	 &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">kickRequest</span><span class="pun">.</span><span class="pln">dynamical </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></code></li><li class="L8"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">kickRequest</span><span class="pun">.</span><span class="pln">kickMotionType </span><span class="pun">=</span><span class="pln">kickMotionType</span><span class="pun">;</span></code></li><li class="L9"><code class="language-cpp"><span class="pln">	 &nbsp;</span></code></li><li class="L0"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">}</span></code></li><li class="L1"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">}</span></code></li><li class="L2"><code class="language-cpp"></code></li><li class="L3"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="com">/** Executes the kick */</span></code></li><li class="L4"><code class="language-cpp"><span class="pln"> &nbsp;state</span><span class="pun">(</span><span class="pln">execute</span><span class="pun">)</span></code></li><li class="L5"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">{</span></code></li><li class="L6"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;transition</span></code></li><li class="L7"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">{</span></code></li><li class="L8"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;</span><span class="kwd">if</span><span class="pun">(</span><span class="pln">theMotionInfo</span><span class="pun">.</span><span class="pln">kickRequest</span><span class="pun">.</span><span class="pln">kickMotionType </span><span class="pun">==</span><span class="pln"> </span><span class="typ">KickRequest</span><span class="pun">::</span><span class="pln">none</span><span class="pun">)</span></code></li><li class="L9"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="kwd">goto</span><span class="pln"> finished</span><span class="pun">;</span></code></li><li class="L0"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">}</span></code></li><li class="L1"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;action</span></code></li><li class="L2"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">{</span></code></li><li class="L3"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">motion </span><span class="pun">=</span><span class="pln"> &nbsp;</span><span class="typ">MotionRequest</span><span class="pun">::</span><span class="pln">kick</span><span class="pun">;</span></code></li><li class="L4"><code class="language-cpp"><span class="pln">	 &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">kickRequest</span><span class="pun">.</span><span class="pln">dynamical </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></code></li><li class="L5"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">kickRequest</span><span class="pun">.</span><span class="pln">kickMotionType </span><span class="pun">=</span><span class="pln"> </span><span class="typ">KickRequest</span><span class="pun">::</span><span class="pln">none</span><span class="pun">;</span></code></li><li class="L6"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">}</span></code></li><li class="L7"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">}</span></code></li><li class="L8"><code class="language-cpp"></code></li><li class="L9"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="com">/** The kick has been executed */</span></code></li><li class="L0"><code class="language-cpp"><span class="pln"> &nbsp;target_state</span><span class="pun">(</span><span class="pln">finished</span><span class="pun">)</span></code></li><li class="L1"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">{</span></code></li><li class="L2"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;action</span></code></li><li class="L3"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">{</span></code></li><li class="L4"><code class="language-cpp"><span class="pln">	 &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">motion </span><span class="pun">=</span><span class="pln"> &nbsp;</span><span class="typ">MotionRequest</span><span class="pun">::</span><span class="pln">kick</span><span class="pun">;</span></code></li><li class="L5"><code class="language-cpp"><span class="pln">	 &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">kickRequest</span><span class="pun">.</span><span class="pln">dynamical </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></code></li><li class="L6"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp; &nbsp;theMotionRequest</span><span class="pun">.</span><span class="pln">kickRequest</span><span class="pun">.</span><span class="pln">kickMotionType </span><span class="pun">=</span><span class="pln"> </span><span class="typ">KickRequest</span><span class="pun">::</span><span class="pln">none</span><span class="pun">;</span></code></li><li class="L7"><code class="language-cpp"><span class="pln"> &nbsp; &nbsp;</span><span class="pun">}</span></code></li><li class="L8"><code class="language-cpp"><span class="pln"> &nbsp;</span><span class="pun">}</span></code></li><li class="L9"><code class="language-cpp"><span class="pun">}</span></code></li></ol></pre><br/>
+    <p style="white-space: normal;">这里是仿照上面的WalkToTarget写的一个射门的option，传入的参数是射门的方式(bhuman源码中只给出了一个测试版的kickForward)</p>
+    <p style="white-space: normal;">调用方式如下:&nbsp;Shoot(KickRequest::kickForward);</p>
+    <p style="white-space: normal;">注意这个option需要球在机器人相对位置正确的地方才能踢得远，这个可以仿照Src/Modules/BehaviorControl/BehaviorControl2015/Options/RolesStriker.h里面调整球的位置到合适的位置。</p>
+    <p style="white-space: normal;">四、KickForward的调整</p>
+    <p style="white-space: normal;">KickRequest的kickForward的具体姿势是根据Config/KickEngine/kickForward.kmc文件定义的</p>
+    <p style="white-space: normal;">由于bhuman给出的测试版的kickForward很慢，我们需要调整它的动作时间，打开kickForward.kmc文件，根据情况将duration的值变小可以加快动作时间</p>
+    <p style="white-space: normal;">如果想改变射门动作，需要在KickRequest.h文件中KickMotionID里添加一个newKick量(对应图中第6行)</p>
+    <p><img border="0" _src="/pic/2_newKickCode.png" src="/pic/2_newKickCode.png" /></p>
+    <p style="white-space: normal;">之后在simRobot里进行修改调试<br/></p>
+    <p style="white-space: normal;">先运行simRobot,选择KickViewSence地图打开其中的kickView如图所示：</p>
+    <p><img border="0" _src="/pic/1_KickView.png" src="/pic/1_KickView.png" /></p>
+    <p style="white-space: normal;">在simRobot的kickView中打开上文所说的kickForward.kmc文件,根据官方文档以及程序中的说明进行调试（对应2013文档的8.1.4.4）</p>
+    <p style="white-space: normal;">主要是运用逆运动学,还要考虑重心，涉及的算法很有趣，有兴趣可以好好搞一搞</p>
+    <div style="white-space: normal;">editor:Dong&nbsp;2016-10-30 23:30</div>
+    <p><br/></p>
+</body>
+
+</html>
