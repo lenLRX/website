@@ -1,0 +1,126 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>将程序部署到Nao上</title>
+    <link href="/blog/css/blog.css" rel="stylesheet">
+    <!--<script src="/js/jquery.js"></script>-->
+    <!--<script src="/js/jquery-scrollspy.js"></script>-->
+    <script src="/blog/js/blog.js"></script>
+</head>
+
+<body>
+    <header>
+        <ul id="top_nav" class="top_navbar">
+            <li class="top_navbar_list"><a>first</a></li>
+            <li class="top_navbar_list"><a>second</a></li>
+        </ul>
+    </header>
+
+    <div class="parent_box">
+        <div id="side_nav" class="side_nav_list">
+            <ul>
+                <li>
+                    <a href="bhuman_chapter5.html#配置路由器">
+					配置路由器
+					</a>
+                </li>
+                <li>
+                    <a href="bhuman_chapter5.html#给Nao机器人安装Bhuman系统">
+					给Nao机器人安装Bhuman系统
+					</a>
+                </li>
+                <li>
+                    <a href="bhuman_chapter5.html#使用bush为Nao上传程序">
+					使用bush为Nao上传程序
+					</a>
+                </li>
+                <li>
+                    <a href="bhuman_chapter5.html#使用网线连接机器人">
+					使用网线连接机器人
+					</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="blog_content">
+            <h1 id="配置路由器">配置路由器</h1>
+            <p>这里暂时先介绍一下试用于GameController2015的路由器的配置，如果要用GameController2016,请看<a href="not_finished.html">下一节</a></p>　
+            <p>首先要想好给nao刷成Bhuman系统的时候，Nao的队伍序号，队员序号，以及队员的名称。队伍序号和队员序号分别对应了分别是机器人ip地址的第三位和第四位。</p>
+            <p style="text-align:center"><img src="/pic/28.png" /></p>
+            <p>路由器LAN配置，LAN口ip设置为手动，　ip地址10.0.x.1,　x 就是机器人ip的第三位，比如我用的是５，如上图，子网掩码为255.255.255.0，然后点击保存。</p>
+            <p>这时需要断开路由器重新连接，连接号路由器以后就可以开始给Nao刷成Bhuman系统了。我们记下这个路由器的SSID和密码，我们实验室的分别是DUT-Robot,DutHumanoid</p>
+
+            <br>
+
+            <h1 id="给Nao机器人安装Bhuman系统">给Nao机器人安装Bhuman系统</h1>
+            <p>在终端里执行：　cd Make/Linux　　接着执行：　make CONFIG=Release　编译好Bhuman程序</p>
+            <p>为机器人创建文件，重新cd 进入Install文件夹下执行:  ./createRobot -t 5 -r 2 Penny</p>
+            <p style="text-align:center"><img src="/pic/29.png" /></p>
+            <p>-t后的参数为机器人的队伍号，-r 后的参数为机器人的队员号。Penny是为当前机器人取的名字。这时会看到输出的提示信息：Don't forget to run addRobotIds!</p>
+            <p>下面呢，需要一个可以连接到的机器人，不论是通过路由器还是用网线直接连都可以，只要通过ip地址能够访问就行，机器人电量要充足。下面我是用拿网线直接连机器人的。</p>
+            <p>接着要执行：　./addRobotIds -ip 10.42.0.26 Penny　－ip后面的参数是你要连接的机器人的ip地址</p>
+            <p style="text-align:center"><img src="/pic/30.png" /></p>
+            <p>然后还需要配置机器人的网络，修改/Install/Network/Profiles下的default文件把自己路由器的ID和密码添加进去。 修改后是这样的：</p>
+            <p><pre>
+                ctrl_interface=/var/run/wpa_supplicant
+                ctrl_interface_group=0
+                ap_scan=1
+
+                network={
+                    ssid="DUT-Robot"
+                    key_mgmt=WPA-PSK
+                    pairwise=CCMP
+                    group=CCMP
+                    psk="DutHumanoid"
+                }
+                </pre> </p>
+            <p>ssid后面的是你要用的路由器的名字，psk是路由器的密码</p>
+            <p>在参加RoboCup比赛的时候要用到官方的路由器这时把只需要把default文件复制一份重命名成官方的路由器的ID 然后在里面分别加入官方路由器的ID,密码等信息就好了。
+                <br>比如官方的路由器ID是SPL_A，  加密方式为　WPA-PSK,    密码　nao!?nao!?
+                <br> 那么我就把default文件复制，粘贴，重命名为SPL_A，然后里面改成：</p>
+            <p><pre>
+                ctrl_interface=/var/run/wpa_supplicant
+                ctrl_interface_group=0
+                ap_scan=1
+
+                network={
+                    ssid="SPL_A"
+                    key_mgmt=WPA-PSK
+                    pairwise=CCMP
+                    group=CCMP
+                    psk="nao!?nao!?"
+                }</pre></p>
+            <p>这样在上传文件的时候指定wlan是SPL_A就可以让机器人连接到官方的路由器了，关于上传文件和路由器的详细配置稍后会提到</p>
+            <p>接着就可以安装bhuman系统了: ./installRobot 10.42.0.26</p>
+            <p style="text-align:center"><img src="/pic/31.png" /></p>
+            <p>此时刷机已经成功了，保持之前配置好的路由器开启，将电脑切的网络连接换到该路由器上，等待机器人重新启动</p>
+
+            <br>
+
+
+            <h1 id="使用bush为Nao上传程序">使用bush为Nao上传程序</h1>
+            <p>终端cd进入BHumanCodeRelease-master/Build/Linux/bush/Release，执行：　./bush　操作界面如下</p>
+            <p style="text-align:center"><img src="/pic/32.png" /></p>
+            <p>Number里面写自己的队伍号，Wlan可以选择None , default, SPL_A, exmaple.wep, example.wpa等等，<br>
+            可以看到SPL_A就是前面在/Install/Network/Profiles里添加的文件， Conf选择Release 点击deploy等待Success!　<br>
+            bush里还有其它选项可供使用，这里不作一一介绍。</p>
+            <p style="text-align:center"><img src="/pic/33.png" /></p>
+            <p>到这里，我们已经将程序上传到Nao机器人上了。</p>
+
+            <br>
+
+            <h1 id="使用网线连接机器人">使用网线连接机器人</h1>
+            <p>你可能会遇到路由器不好用的情况，那么这时候你就需要拿网线直接和机器人相连了。</p>
+            <p>naoqi系统下需要把网络连接的ipv4的方法改成与其它计算机共享，这个比较简单</p>
+            <p style="text-align:center"><img src="/pic/34.png" /></p>
+            <p>Bhuman系统下Nao有线连接需要配置一些东西，打开编辑连接，ipv4 方法改成“手动”，增加ip　192.168.5.111,　子网掩码：255.255.0.0 <br>
+            网关0.0.0.0;点击保存，这样就可以连接到机器人,实现ssh远程登录等功能。</p>
+            <p style="text-align:center"><img src="/pic/35.png" /></p>
+        </div>
+    </div>
+</body>
+
+</html>
