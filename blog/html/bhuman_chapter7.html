@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>将程序部署到Nao上</title>
+    <title>使用GameController模拟正式比赛</title>
     <link href="/blog/css/blog.css" rel="stylesheet">
     <!--<script src="/js/jquery.js"></script>-->
     <!--<script src="/js/jquery-scrollspy.js"></script>-->
@@ -39,7 +39,7 @@
             <h1 id="使用GameController2015">使用GameController2015</h1>
             <p>对于GameController2015那就直接打开GameController,然后选择两个不同的队伍，其中的一个要和bush里上传程序用的队伍号一致，点击Start开始。 </p>
             <p style="text-align:center"><img src="/pic/36.png" /></p>
-            <p>可以看到当前机器人是５号队，２号队员，然后点击胸前按钮机器人会站起来，点击GameController里的Ready,Set,Play,机器人就会动起来啦！</p>　
+            <p>可以看到当前机器人是５号队，２号队员，然后点击胸前按钮机器人会站起来，点击GameController里的Ready,Set,Play,机器人就会动起来啦！</p>
             <p>这里不需要对路由器进行特殊的设置，路由器保持默认状态就好，具体的要求是：</p>
             <p>路由器的ip地址第三位和机器人的第三位一致，第四位不能和机器人的一致，子网掩码为255.255.255.0,　DHCP服务器开启</p>
 
@@ -64,7 +64,7 @@
             <p>使用文本编辑器打开GameCtrl.cpp使用Ctrl + F 查找PORT 将第一个位置处的GAMECONTROLLER_PORT改为GAMECONTROLLER_RETURN_PORT，</p>
             <p>第二个位置处的GAMECONTROLLER_PORT改为GAMECONTROLLER_DATA_PORT，重新进入Make/Linux文件夹make CONFIG=Release编译一下。</p>
             <p>打开bush将最新的程序上传到机器人。然后开启2016年的GameController就可以开始模拟比赛了,这里仍然要注意两个队伍的一个要和bush里上传程序用的队伍号一致</p>
-            
+
             <br>
         </div>
     </div>
