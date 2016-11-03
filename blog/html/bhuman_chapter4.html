@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>编写你自己的策略</title>
+    <title>将程序部署到Nao上</title>
     <link href="/blog/css/blog.css" rel="stylesheet">
     <!--<script src="/js/jquery.js"></script>-->
     <!--<script src="/js/jquery-scrollspy.js"></script>-->
@@ -22,102 +22,102 @@
         <div id="side_nav" class="side_nav_list">
             <ul>
                 <li>
-                    <a href="bhuman_chapter4.html#代码结构的基本介绍">
-					代码结构的基本介绍
+                    <a href="bhuman_chapter6.html#配置路由器">
+					配置路由器
 					</a>
                 </li>
                 <li>
-                    <a href="bhuman_chapter4.html#如何对5个机器人的行为进行策略设计？">
-					如何对5个机器人的行为进行策略设计？
+                    <a href="bhuman_chapter6.html#给Nao机器人安装Bhuman系统">
+					给Nao机器人安装Bhuman系统
 					</a>
                 </li>
                 <li>
-                    <a href="bhuman_chapter4.html#调用其他模块的结果">
-					调用其他模块的结果
+                    <a href="bhuman_chapter6.html#使用bush为Nao上传程序">
+					使用bush为Nao上传程序
+					</a>
+                </li>
+                <li>
+                    <a href="bhuman_chapter6.html#使用网线连接机器人">
+					使用网线连接机器人
 					</a>
                 </li>
             </ul>
         </div>
 
         <div class="blog_content">
-            <h1 id="代码结构的基本介绍">代码结构的基本介绍</h1>
-            <ol>
-                <li>Striker</li>
-                <li>Supporter</li>
-                <li>Defender1</li>
-                <li>Defender2</li>
-                <li>Keeper</li>
-            </ol>
-            <p style="text-align:center"><img src="/pic/24.png" /></p>
-            <p>如果要在Options文件夹下添加.h文件，需要在Options.h里#include “.h文件路径“</p>
-            <p style="text-align:center"><img src="/pic/25.png" /></p>
-            <p>GameControl文件夹对比赛的流程进行控制，比赛包括ready,set,playing,penalty四个状态（详细阅读rules2016）</p>
-            <p>HandleGameState.h</p>
-            <p style="text-align:center"><img src="/pic/26.png" /></p>
-            <p>这里的ReadyState（）和PlayingState（）是GameControl文件夹下的.h文件定义的option，如果想要改变ready和playing状态，需要改PlayingState.h和ReadyState.h PlayingState.h可以设置不同队员的角色 ReadyState.h<br>可以写让机器人自动走上场到指定的位点的代码（具体位点看rules2016）
+            <h1 id="配置路由器">配置路由器</h1>
+            <p>这里暂时先介绍一下试用于GameController2015的路由器的配置，如果要用GameController2016,请看<a href="bhuman_chapter7.html">下一节</a></p>
+            <p>首先要想好给nao刷成Bhuman系统的时候，Nao的队伍序号，队员序号，以及队员的名称。队伍序号和队员序号分别对应了分别是机器人ip地址的第三位和第四位。</p>
+            <p style="text-align:center"><img src="/pic/28.png" /></p>
+            <p>路由器LAN配置，LAN口ip设置为手动，　ip地址10.0.x.1,　x 就是机器人ip的第三位，比如我用的是５，如上图，子网掩码为255.255.255.0，然后点击保存。</p>
+            <p>这时需要断开路由器重新连接，连接号路由器以后就可以开始给Nao刷成Bhuman系统了。我们记下这个路由器的SSID和密码，我们实验室的分别是DUT-Robot,DutHumanoid</p>
+
+            <br>
+
+            <h1 id="给Nao机器人安装Bhuman系统">给Nao机器人安装Bhuman系统</h1>
+            <p>在终端里执行：　cd Make/Linux　　接着执行：　make CONFIG=Release　编译好Bhuman程序</p>
+            <p>为机器人创建文件，重新cd 进入Install文件夹下执行: ./createRobot -t 5 -r 2 Penny</p>
+            <p style="text-align:center"><img src="/pic/29.png" /></p>
+            <p>-t后的参数为机器人的队伍号，-r 后的参数为机器人的队员号。Penny是为当前机器人取的名字。这时会看到输出的提示信息：Don't forget to run addRobotIds!</p>
+            <p>下面呢，需要一个可以连接到的机器人，不论是通过路由器还是用网线直接连都可以，只要通过ip地址能够访问就行，机器人电量要充足。下面我是用拿网线直接连机器人的。</p>
+            <p>接着要执行：　./addRobotIds -ip 10.42.0.26 Penny　将机器人的硬件信息和我们创建的文件绑定在一起，－ip后面的参数是你要连接的机器人的ip地址</p>
+            <p style="text-align:center"><img src="/pic/30.png" /></p>
+            <p>然后还需要配置机器人的网络，修改/Install/Network/Profiles下的default文件把自己路由器的ID和密码添加进去。 修改后是这样的：</p>
+            <p><pre>
+                ctrl_interface=/var/run/wpa_supplicant
+                ctrl_interface_group=0
+                ap_scan=1
+
+                network={
+                    ssid="DUT-Robot"
+                    key_mgmt=WPA-PSK
+                    pairwise=CCMP
+                    group=CCMP
+                    psk="DutHumanoid"
+                }
+                </pre> </p>
+            <p>ssid后面的是你要用的路由器的名字，psk是路由器的密码</p>
+            <p>在参加RoboCup比赛的时候要用到官方的路由器这时把只需要把default文件复制一份重命名成官方的路由器的ID 然后在里面分别加入官方路由器的ID,密码等信息就好了。
+                <br>比如官方的路由器ID是SPL_A， 加密方式为　WPA-PSK, 密码　nao!?nao!?
+                <br> 那么我就把default文件复制，粘贴，重命名为SPL_A，然后里面改成：</p>
+            <p><pre>
+                ctrl_interface=/var/run/wpa_supplicant
+                ctrl_interface_group=0
+                ap_scan=1
+
+                network={
+                    ssid="SPL_A"
+                    key_mgmt=WPA-PSK
+                    pairwise=CCMP
+                    group=CCMP
+                    psk="nao!?nao!?"
+                }</pre></p>
+            <p>这样在上传文件的时候指定wlan是SPL_A就可以让机器人连接到官方的路由器了，关于上传文件和路由器的详细配置稍后会提到</p>
+            <p>执行下一步之前需要将Nao机器人的系统重新刷成2.1版本的，如果不这么做具体有哪些影响，目前我还不清楚</p>
+            <p>接着就可以安装bhuman系统了: 　./installRobot 10.42.0.26, 　这个ip依然是Nao在Naoqi系统下，当前的ip地址</p>
+            <p style="text-align:center"><img src="/pic/31.png" /></p>
+            <p>此时刷机已经成功了，保持之前配置好的路由器开启，将电脑切的网络连接换到该路由器上，等待机器人重新启动</p>
+
+            <br>
+
+
+            <h1 id="使用bush为Nao上传程序">使用bush为Nao上传程序</h1>
+            <p>终端cd进入BHumanCodeRelease-master/Build/Linux/bush/Release，执行：　./bush　操作界面如下</p>
+            <p style="text-align:center"><img src="/pic/32.png" /></p>
+            <p>Number里面写自己的队伍号，Wlan可以选择None , default, SPL_A, exmaple.wep, example.wpa等等，<br> 可以看到SPL_A就是前面在/Install/Network/Profiles里添加的文件， Conf选择Release 点击deploy等待Success!　<br> bush里还有其它选项可供使用，这里不作一一介绍。
             </p>
+            <p style="text-align:center"><img src="/pic/33.png" /></p>
+            <p>到这里，我们已经将程序上传到Nao机器人上了。</p>
+
             <br>
-            <h1 id="如何对5个机器人的行为进行策略设计？">如何对5个机器人的行为进行策略设计？</h1>
-            <p><pre>在Roles文件夹下自行创建5个机器人的行为文件，striker.h,keeper.h,defender1.h,defender2.h,supports.h（名字可以随意，但是要分清角色）
-仿照Striker.h编写CABSL代码（bhuman自己设计的语言）
-具体结构为：
-Option(xxx)
-{
-	Initial_state()
-	{
-		Transition
-		{
-		}
-		Action
-		{
-		}
-	}
 
-	State(1)
-	{
-		Transition
-		{
-		}
-		Action
-		{
-		}
-
-	}
-
-	State(2)
-	{
-		Transition
-		{
-		}
-		Action
-		{
-		}
-
-	}
-
-	.
-	.
-	.
-	.
-	.
-}
-有没有感到跟choregraphe盒子跳转很像？需要注意的是action里的动作是同步的，所以同一个action不能够出现两次walkToTarget()，
-一个option可以调用另一个 option</pre></p>
-            <br>
-            <h1 id="调用其他模块的结果">调用其他模块的结果</h1>
-            <p>我们前面提到了theRobotPose，但是并没有说明这个变量是在哪里定义的。</p>
-            <p>打开BHumanCodeRelease/Src/Modules/BehaviorControl/BehaviorControl2015/BehaviorControl2015.h文件，我们可以看到一长串的REQUIRES和PROVIDES</p>
-            <p style="text-align:center"><img src="/pic/27.png" /></p>
-            <p>可以看到每个REQUIRES和PROVIDES后面都跟了一个类型的名称。</p>
-            <p>事实上</p>
-            <p>REQUIRES(CLASSFOO)</p>
-            <p>相当于</p>
-            <p>const CLASSFOO& theCLASSFOO = ...</p>
-            <p>PROVIDES(CLASSFOO)</p>
-            <p>则需要你自己定义一个（这个不是很确定）</p>
-            <p>CLASSFOO& theCLASSFOO；</p>
-            <p>然而在如果你不是自定义模块的话暂时不需要考虑这些。</p>
-            <p>你只需要知道你可以通过修改PROVIDES的theCLASSFOO就可以把这个变量传递给其他模块。</p>
+            <h1 id="使用网线连接机器人">使用网线连接机器人</h1>
+            <p>你可能会遇到路由器不好用的情况，那么这时候你就需要拿网线直接和机器人相连了。</p>
+            <p>naoqi系统下需要把网络连接的ipv4的方法改成与其它计算机共享，这个比较简单</p>
+            <p style="text-align:center"><img src="/pic/34.png" /></p>
+            <p>Bhuman系统下Nao有线连接需要配置一些东西，打开编辑连接，ipv4 方法改成“手动”，增加ip　192.168.5.111,　子网掩码：255.255.0.0 <br> 网关0.0.0.0;点击保存，这样就可以连接到机器人,实现ssh远程登录等功能。
+            </p>
+            <p style="text-align:center"><img src="/pic/35.png" /></p>
         </div>
     </div>
 </body>
