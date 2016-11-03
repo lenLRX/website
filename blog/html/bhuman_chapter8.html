@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>使用GameController模拟正式比赛</title>
+    <title>使用SimRobot调试程序</title>
     <link href="/blog/css/blog.css" rel="stylesheet">
     <!--<script src="/js/jquery.js"></script>-->
     <!--<script src="/js/jquery-scrollspy.js"></script>-->
@@ -14,8 +14,7 @@
 <body>
     <header>
         <ul id="top_nav" class="top_navbar">
-            <li class="top_navbar_list"><a>first</a></li>
-            <li class="top_navbar_list"><a>second</a></li>
+            <li class="top_navbar_list"><a href="bhuman_index.html">返回首页</a></li>
         </ul>
     </header>
 
@@ -23,49 +22,90 @@
         <div id="side_nav" class="side_nav_list">
             <ul>
                 <li>
-                    <a href="bhuman_chapter7.html#使用GameController2015">
-					使用GameController2015
+                    <a href="bhuman_chapter3.html#使用SimRobot打开一个场景">
+					使用SimRobot打开一个场景
 					</a>
                 </li>
                 <li>
-                    <a href="bhuman_chapter7.html#使用GameController2016">
-					使用GameController2016
+                    <a href="bhuman_chapter3.html#SimRobot界面介绍">
+					SimRobot界面介绍
+					</a>
+                </li>
+                <li>
+                    <a href="bhuman_chapter3.html#开始模拟">
+					开始模拟
+					</a>
+                </li>
+                <li>
+                    <a href="bhuman_chapter3.html#输出调试信息">
+					输出调试信息
 					</a>
                 </li>
             </ul>
         </div>
 
         <div class="blog_content">
-            <h1 id="使用GameController2015">使用GameController2015</h1>
-            <p>对于GameController2015那就直接打开GameController,然后选择两个不同的队伍，其中的一个要和bush里上传程序用的队伍号一致，点击Start开始。 </p>
-            <p style="text-align:center"><img src="/pic/36.png" /></p>
-            <p>可以看到当前机器人是５号队，２号队员，然后点击胸前按钮机器人会站起来，点击GameController里的Ready,Set,Play,机器人就会动起来啦！</p>
-            <p>这里不需要对路由器进行特殊的设置，路由器保持默认状态就好，具体的要求是：</p>
-            <p>路由器的ip地址第三位和机器人的第三位一致，第四位不能和机器人的一致，子网掩码为255.255.255.0,　DHCP服务器开启</p>
-
+            <h1 id="使用SimRobot打开一个场景">使用SimRobot打开一个场景</h1>
+            <p>双击打开或者在终端中运行(取决于你的编译选项，可能是Debug/Develop/Release三者之一)</p>
+            <p><b>BHumanCodeRelease/Build/Linux/SimRobot/Develop/SimRobot</b></p>
+            <p>点击左上角的打开按钮</p>
+            <p style="text-align:center"><img src="/pic/4.png" /></p>
+            <p>然后选择一个场景，比如BH2015.ros2（路径在BHumanCodeRelease/Conifg/Scenes/文件夹下）</p>
+            <p style="text-align:center"><img src="/pic/5.png" /></p>
             <br>
-
-            <h1 id="使用GameController2016">使用GameController2016</h1>
-            <p>由于GameController2016相比2015版的改动比较大，路由器相应的配置也要发生改变</p>
-            <p>首先需要将路由器分配的ip地址设置为10.0.1.1,子网掩码设置为255.255.0.0,点击保存,然后断开路由器重新连接</p>
-            <p style="text-align:center"><img src="/pic/37.png" /></p>
-            <p>然后还需要关闭路由器的DHCP服务器</p>
-            <p style="text-align:center"><img src="/pic/38.png" /></p>
-            <p>如图片最上部分所示，下面对是否关闭DHCP服务器做一些说明</p>
-            <p>GameController2015在关闭DHCP之后是不能正常使用的，同时在Bhuman2015年开源的代码下，SimRobot中的团队通信也会受到影响，不过实体的机器人经过测试没有问题.</p>
-            <p>但是GameController2016就不依赖DHCP了，在正式的RoboCup比赛中，官方的路由器是关闭了DHCP的，因为这样才能让两个队伍，在Nao机器人ip第三位不同的情况下同时连接在一个路由器下。</p>
-            <p>意思就是说，你可以选择关闭DHCP,不过稍后电脑的连接需要手动编辑；　也可以选择不关闭DHCP,等参加比赛的时候再说，这时你的路由器的ip地址第三位必须和机器人的第三位保持一致。</p>
-            <p>但是使用GameController2016必须要保证路由器的子网掩码为：　255.255.0.0</p>
-            <p>由于关闭了路由器的DHCP功能，然后路由器就不能自主分配ip地址了，然后就需要手动编辑一下连接，如下图: </p>
-            <p style="text-align:center"><img src="/pic/39.png" /></p>
-            <p>方法：手动，增加ip: 10.0.5.111, 子网掩码：255.255.0.0, 网关　0.0.0.0,然后点击保存，这样电脑就可以连接到路由器了。</p>
-            <p>另外还需要把GameController2016/include下的RoboCupGameControlData.h，SPLCoachMessage.h　SPLStandardMessage.h</p>
-            <p>这三个文件复制，粘贴到BHumanCodeRelease-master/Util/GameController/include里面，选择替换，然后进入/Src/libgamectrl，</p>
-            <p>使用文本编辑器打开GameCtrl.cpp使用Ctrl + F 查找PORT 将第一个位置处的GAMECONTROLLER_PORT改为GAMECONTROLLER_RETURN_PORT，</p>
-            <p>第二个位置处的GAMECONTROLLER_PORT改为GAMECONTROLLER_DATA_PORT，重新进入Make/Linux文件夹make CONFIG=Release编译一下。</p>
-            <p>打开bush将最新的程序上传到机器人。然后开启2016年的GameController就可以开始模拟比赛了,这里仍然要注意两个队伍的一个要和bush里上传程序用的队伍号一致</p>
-
+            <h1 id="SimRobot界面介绍">SimRobot界面介绍</h1>
+            <p>打开SimRobot一行你应该会首先看到以下界面</p>
+            <p style="text-align:center"><img src="/pic/6.png" /></p>
+            <p>双击RoboCup那一项弹出以下子窗口。每个子窗口可以拖动缩放。</p>
+            <p style="text-align:center"><img style="width:90%" src="/pic/7.png" /></p>
+            <p>点开image项，可以看到有4项，其中lower代表下摄像头看到的图像，segmented代表经过处理后经过颜色分类得到的图像。<br>识别得到的结果也会画在原始图像上，如图中红色的场地线黑黑圈代表的红球。</p>
+            <p style="text-align:center"><img style="width:90%" src="/pic/8.png" /></p>
+            <p>点开behavior可以看到机器人正在执行行为的调用树。</p>
+            <p style="text-align:center"><img style="width:90%" src="/pic/9.png" /></p>
+            <p>点开behavior下的colorCalibration进入色标矫正界面。可以看到随着我们拖动滑动条，右边的图像也发生变化。</p>
+            <p style="text-align:center"><img style="width:90%" src="/pic/10.png" /></p>
+            <p>将鼠标长时间放在图像上可以显示该点像素值，可以据此校准色标。</p>
+            <p style="text-align:center"><img src="/pic/11.png" /></p>
+            <p>点击上面的按钮，可以选择要矫正的颜色。</p>
+            <p style="text-align:center"><img src="/pic/12.png" /></p>
+            <p>在图像上点击右键，菜单中有若干选项。</p>
+            <p style="text-align:center"><img src="/pic/13.png" /></p>
+            <p>点开field/worldState可以看到俯视图。这个俯视图代表了机器人自己的认知。比如蓝色的盒子代表机器人认为自己所处的位置，灰色的盒子代表机器人的真实位置（仅限模拟环境）。至于为什么自定位出现了偏差，后面的章节会提到。</p>
+            <p style="text-align:center"><img src="/pic/15.png" /></p>
+            <h1 id="开始模拟">开始模拟</h1>
+            <p>介绍完界面，是时候让机器人动起来了。然而怎么做呢。</p>
+            <p>打开BHumanCodeRelease/Config/Scenes/Includes/GameState.con文件</p>
+            <p style="text-align:center"><img src="/pic/16.png" /></p>
+            <p>可以看到我们可以通过各种组合键切换比赛状态，对应GameController的功能。</p>
+            <p>按下Shift+Ctrl+P切换到Playing状态开始比赛！</p>
+            <p style="text-align:center"><img src="/pic/17.png" /></p>
+            <p>可以看到behavior状态已经切换到playing。</p>
             <br>
+            <h1 id="输出调试信息">输出调试信息</h1>
+            <p>BHuman代码中提供了丰富的调试方法，在这里我简单介绍两种方法。</p>
+            <br>
+            <h2>OUTPUT_TEXT宏</h2>
+            <p>使用方法： <b>OUTPUT_TEXT(字符串);</b></p>
+            <p>输出字符串会被显示在console中。</p>
+            <p>我们打开 BHumanCodeRelease/Src/Modules/BehaviorControl/BehaviorControl2015/Options/Soccer.h 文件,在61行处加入以下代码。</p>
+            <p style="text-align:center"><img src="/pic/19.png" /></p>
+            <p>重新编译，并打开SimRobot，开始一场比赛。</p>
+            <p style="text-align:center"><img style="width:90%" src="/pic/18.png" /></p>
+            <p>可以看到，左边的console不停地输出“playing Soccer!”。</p>
+            <br>
+            <h2>空白函数</h2>
+            <p>复杂的结构体要转化为字符串是一件挺麻烦的事情，然而我们可以看到在behavior中会显示函数的参数。所以我们决定使用空白的option来显示变量。</p>
+            <p>我们创建一个文件：BHumanCodeRelease/Src/Modules/BehaviorControl/BehaviorControl2015/Options/ShowPose2f.h</p>
+            <p>向文件中写入以下代码</p>
+            <p style="text-align:center"><img src="/pic/20.png" /></p>
+            <p>打开BHumanCodeRelease/Src/Modules/BehaviorControl/BehaviorControl2015/Options.h文件，加入刚才的头文件。</p>
+            <p>注意：这个头文件的引用顺序不是唯一的，但是要注意它们之间的<b>依赖关系</b>。</p>
+            <p style="text-align:center"><img src="/pic/21.png" /></p>
+            <p>在刚才的OUTPUT_TEXT下加一行：</p>
+            <p style="text-align:center"><img src="/pic/23.png" /></p>
+            <p>theRobotPose代表了机器人的位置，至于这个变量在哪定义的，之后再说吧</p>
+            <p>重新编译运行SimRobot</p>
+            <p style="text-align:center"><img style="width:90%" src="/pic/22.png" /></p>
         </div>
     </div>
 </body>
