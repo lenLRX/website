@@ -1,0 +1,73 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>将程序部署到Nao上</title>
+    <link href="/blog/css/blog.css" rel="stylesheet">
+    <!--<script src="/js/jquery.js"></script>-->
+    <!--<script src="/js/jquery-scrollspy.js"></script>-->
+    <script src="/blog/js/blog.js"></script>
+</head>
+
+<body>
+    <header>
+        <ul id="top_nav" class="top_navbar">
+            <li class="top_navbar_list"><a>first</a></li>
+            <li class="top_navbar_list"><a>second</a></li>
+        </ul>
+    </header>
+
+    <div class="parent_box">
+        <div id="side_nav" class="side_nav_list">
+            <ul>
+                <li>
+                    <a href="bhuman_chapter7.html#使用GameController2015">
+					使用GameController2015
+					</a>
+                </li>
+                <li>
+                    <a href="bhuman_chapter7.html#使用GameController2016">
+					使用GameController2016
+					</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="blog_content">
+            <h1 id="使用GameController2015">使用GameController2015</h1>
+            <p>对于GameController2015那就直接打开GameController,然后选择两个不同的队伍，其中的一个要和bush里上传程序用的队伍号一致，点击Start开始。 </p>
+            <p style="text-align:center"><img src="/pic/36.png" /></p>
+            <p>可以看到当前机器人是５号队，２号队员，然后点击胸前按钮机器人会站起来，点击GameController里的Ready,Set,Play,机器人就会动起来啦！</p>　
+            <p>这里不需要对路由器进行特殊的设置，路由器保持默认状态就好，具体的要求是：</p>
+            <p>路由器的ip地址第三位和机器人的第三位一致，第四位不能和机器人的一致，子网掩码为255.255.255.0,　DHCP服务器开启</p>
+
+            <br>
+
+            <h1 id="使用GameController2016">使用GameController2016</h1>
+            <p>由于GameController2016相比2015版的改动比较大，路由器相应的配置也要发生改变</p>
+            <p>首先需要将路由器分配的ip地址设置为10.0.1.1,子网掩码设置为255.255.0.0,点击保存,然后断开路由器重新连接</p>
+            <p style="text-align:center"><img src="/pic/37.png" /></p>
+            <p>然后还需要关闭路由器的DHCP服务器</p>
+            <p style="text-align:center"><img src="/pic/38.png" /></p>
+            <p>如图片最上部分所示，下面对是否关闭DHCP服务器做一些说明</p>
+            <p>GameController2015在关闭DHCP之后是不能正常使用的，同时在Bhuman2015年开源的代码下，SimRobot中的团队通信也会受到影响，不过实体的机器人经过测试没有问题.</p>
+            <p>但是GameController2016就不依赖DHCP了，在正式的RoboCup比赛中，官方的路由器是关闭了DHCP的，因为这样才能让两个队伍，在Nao机器人ip第三位不同的情况下同时连接在一个路由器下。</p>
+            <p>意思就是说，你可以选择关闭DHCP,不过稍后电脑的连接需要手动编辑；　也可以选择不关闭DHCP,等参加比赛的时候再说，这时你的路由器的ip地址第三位必须和机器人的第三位保持一致。</p>
+            <p>但是使用GameController2016必须要保证路由器的子网掩码为：　255.255.0.0</p>
+            <p>由于关闭了路由器的DHCP功能，然后路由器就不能自主分配ip地址了，然后就需要手动编辑一下连接，如下图: </p>
+            <p style="text-align:center"><img src="/pic/39.png" /></p>
+            <p>方法：手动，增加ip: 10.0.5.111, 子网掩码：255.255.0.0, 网关　0.0.0.0,然后点击保存，这样电脑就可以连接到路由器了。</p>
+            <p>另外还需要把GameController2016/include下的RoboCupGameControlData.h，SPLCoachMessage.h　SPLStandardMessage.h</p>
+            <p>这三个文件复制，粘贴到BHumanCodeRelease-master/Util/GameController/include里面，选择替换，然后进入/Src/libgamectrl，</p>
+            <p>使用文本编辑器打开GameCtrl.cpp使用Ctrl + F 查找PORT 将第一个位置处的GAMECONTROLLER_PORT改为GAMECONTROLLER_RETURN_PORT，</p>
+            <p>第二个位置处的GAMECONTROLLER_PORT改为GAMECONTROLLER_DATA_PORT，重新进入Make/Linux文件夹make CONFIG=Release编译一下。</p>
+            <p>打开bush将最新的程序上传到机器人。然后开启2016年的GameController就可以开始模拟比赛了,这里仍然要注意两个队伍的一个要和bush里上传程序用的队伍号一致</p>
+            
+            <br>
+        </div>
+    </div>
+</body>
+
+</html>
